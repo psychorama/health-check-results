@@ -10,8 +10,16 @@ class CheckResult
     public const STATUS_CRASHED = 'crashed';
     public const STATUS_SKIPPED = 'skipped';
 
+    public string $name;
+    public string $label = '';
+    public string $notificationMessage = '';
+    public string $shortSummary = '';
+    public string $status = '';
+    public array  $meta = [];
+
     /**
      * @param string $name
+     * @param string $label
      * @param string $notificationMessage
      * @param string $shortSummary
      * @param string $status
@@ -25,26 +33,33 @@ class CheckResult
         string $notificationMessage = '',
         string $shortSummary = '',
         string $status = '',
-        array  $meta = [],
+        array  $meta = []
     ): self {
         return new self(...func_get_args());
     }
 
     /**
      * @param string $name
+     * @param string $label
      * @param string $notificationMessage
      * @param string $shortSummary
      * @param string $status
      * @param array<int, mixed> $meta
      */
     public function __construct(
-        public string $name,
-        public string $label = '',
-        public string $notificationMessage = '',
-        public string $shortSummary = '',
-        public string $status = '',
-        public array  $meta = [],
+        string $name,
+        string $label = '',
+        string $notificationMessage = '',
+        string $shortSummary = '',
+        string $status = '',
+        array  $meta = []
     ) {
+        $this->name = $name;
+        $this->label = $label;
+        $this->notificationMessage = $notificationMessage;
+        $this->shortSummary = $shortSummary;
+        $this->status = $status;
+        $this->meta = $meta;
     }
 
     public function notificationMessage(string $notificationMessage): self

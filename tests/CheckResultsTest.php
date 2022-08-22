@@ -8,12 +8,12 @@ it('can write health check results as json', function () {
     $checkResults = new CheckResults(DateTime::createFromFormat('Y-m-d H:i:s', '2021-01-01 00:00:00'));
 
     $checkResult = new CheckResult(
-        name: 'UsedDiskSpace',
-        label: 'Used disk space',
-        notificationMessage: 'Your disk is almost full (91%)',
-        shortSummary: '91%',
-        status: CheckResult::STATUS_FAILED,
-        meta: ['used_disk_space_percentage' => 91]
+        'UsedDiskSpace',
+        'Used disk space',
+        'Your disk is almost full (91%)',
+        '91%',
+        CheckResult::STATUS_FAILED,
+        ['used_disk_space_percentage' => 91]
     );
 
     $checkResults

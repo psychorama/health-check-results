@@ -17,13 +17,20 @@ class CheckResults
         $properties = json_decode($json, true);
 
         $checkResults = array_map(
-            fn (array $checkResultProperties) => new CheckResult(...$checkResultProperties),
+            fn (array $checkResultProperties) => new CheckResult(
+                $checkResultProperties['name'],
+                $checkResultProperties['label'],
+                $checkResultProperties['notificationMessage'],
+                $checkResultProperties['shortSummary'],
+                $checkResultProperties['status'],
+                $checkResultProperties['meta'],
+            ),
             $properties['checkResults'],
         );
 
         return new self(
-            finishedAt: (new DateTime())->setTimestamp($properties['finishedAt']),
-            checkResults: $checkResults,
+            (new DateTime())->setTimestamp($properties['finishedAt']),
+            $checkResults,
         );
     }
 
@@ -46,7 +53,7 @@ class CheckResults
     }
 
     /**
-     * @return array<int, \OhDear\HealthCheckResults\CheckResult>
+     * @return array<int, CheckResult>
      */
     public function checkResults(): array
     {
